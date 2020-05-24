@@ -1,11 +1,12 @@
+/* eslint-disable import/order */
+import Features from 'components/Features/Features';
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import Features from 'shared/components/Features';
+import { useDispatch } from 'react-redux';
 import { setLocale } from 'store/app/actions';
 import { Locale } from 'store/app/types';
 
-const App: React.FC<any> = () => {
+const Home: React.FC<any> = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const handleLocaleChange = useCallback(
@@ -31,4 +32,4 @@ const App: React.FC<any> = () => {
     );
 };
 
-export default App;
+export default Home;

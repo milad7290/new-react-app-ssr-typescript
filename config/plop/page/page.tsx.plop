@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import css from './{{pascalCase componentName}}.module.css';
+import css from './{{pascalCase pageName}}.module.css';
 
-const {{pascalCase componentName}} = (props: any) => {
+const {{pascalCase pageName}} = (props: any) => {
     const { t } = useTranslation();
 
     return (<React.Fragment>
@@ -11,4 +11,4 @@ const {{pascalCase componentName}} = (props: any) => {
 </React.Fragment>);
 };
 
-export default {{pascalCase componentName}};
+export default {{pascalCase pageName}};

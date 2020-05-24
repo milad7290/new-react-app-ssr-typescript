@@ -4,12 +4,12 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Link, Route, Switch } from 'react-router-dom';
 import favicon from '../shared/assets/favicon.png';
-import { ReactComponent as ReactLogo } from './assets/react.svg';
-import Home from './pages/Home';
-import Page1 from './pages/Page-1';
-import Page2 from './pages/Page-2';
-import routes from './routes';
 import css from './App.module.css';
+import { ReactComponent as ReactLogo } from './assets/react.svg';
+import Home from './pages/Home/Home';
+import Page1 from './pages/Page-1/Page-1';
+import Page2 from './pages/Page-2/Page-2';
+import routes from './routes';
 
 // Does not yet work with server side rendering:
 // const Home = React.lazy(() => import('./pages/Home'));

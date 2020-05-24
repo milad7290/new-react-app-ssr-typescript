@@ -1,34 +1,34 @@
 import { produce } from 'immer';
 import { ActionTypes } from './actions';
-import { Action, {{pascalCase reducerName}} } from './types';
+import { Action, {{pascalCase storeName}} } from './types';
 
-export const initialState: {{pascalCase reducerName}} = Object.freeze({
+export const initialState: {{pascalCase storeName}} = Object.freeze({
     didInvalidate: false,
     isLoading: false,
     items: [],
     updatedAt: null,
 });
 
-export default (state: {{pascalCase reducerName}} = initialState, action: Action) =>
+export default (state: {{pascalCase storeName}} = initialState, action: Action) =>
     produce(state, (draft) => {
         switch (action.type) {
-            case ActionTypes.{{upperCase (snakeCase reducerName)}}_REQUEST:
+            case ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST:
                 draft.isLoading = true;
                 return;
 
-            case ActionTypes.{{upperCase (snakeCase reducerName)}}_SUCCESS:
+            case ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS:
                 draft.didInvalidate = false;
                 draft.updatedAt = action.payload.updatedAt;
                 draft.items = action.payload.items || [];
                 draft.isLoading = false;
                 return;
 
-            case ActionTypes.{{upperCase (snakeCase reducerName)}}_FAILURE:
+            case ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE:
                 draft.didInvalidate = true;
                 draft.isLoading = false;
                 return;
 
-            case ActionTypes.{{upperCase (snakeCase reducerName)}}_INVALIDATE:
+            case ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE:
                 draft.didInvalidate = true;
                 return;
         }

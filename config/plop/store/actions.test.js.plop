@@ -9,6 +9,6 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Your test', () => {
     it('should do something', () => {
-        const store = mockStore({ {{pascalCase reducerName}}: initialState });
+        const store = mockStore({ {{pascalCase storeName}}: initialState });
     });
 });
