@@ -10,6 +10,7 @@
   "scripts": {
     "analyze": "yarn-or-npm build:with-stats && yarn-or-npm start:analyzer",
     "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/build",
+    "start:build": "node build/server/server.js",
     "build:with-stats": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.tooling.json webpack --config config/webpack.config.ts/client.prod.ts --json > build/client/static/bundle-stats.json",
     "clean:transpiled": "rimraf build/transpiled",
     "depgraph": "depcruise -c .dependency-cruiser.js --exclude \"node_modules/*\" --output-type dot src | dot -T svg > dependency-graph.svg",
