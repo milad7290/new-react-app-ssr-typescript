@@ -98,7 +98,7 @@ module.exports = (plop) => {
             const actions = [
                 {
                     type: 'pretty-add',
-                    path: './src/shared/models/{{camelCase modelName}}.model.ts',
+                    path: './src/shared/models/{{dashCase modelName}}.model.ts',
                     templateFile: './config/plop/model/model.ts.plop',
                 },
             ];
@@ -120,41 +120,83 @@ module.exports = (plop) => {
             const actions = [
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/actions.ts',
+                    path: './src/shared/models/{{dashCase storeName}}.model.ts',
+                    templateFile: './config/plop/model/model.ts.plop',
+                },
+                {
+                    type: 'pretty-add',
+                    path: './src/shared/store/{{dashCase storeName}}/actions.ts',
                     templateFile: './config/plop/store/actions.ts.plop',
                 },
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/actions.test.ts',
+                    path: './src/shared/store/{{dashCase storeName}}/actions.test.ts',
                     templateFile: './config/plop/store/actions.test.js.plop',
                 },
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/reducer.ts',
+                    path: './src/shared/store/{{dashCase storeName}}/reducer.ts',
                     templateFile: './config/plop/store/reducer.ts.plop',
                 },
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/reducer.test.ts',
+                    path: './src/shared/store/{{dashCase storeName}}/reducer.test.ts',
                     templateFile: './config/plop/store/reducer.test.js.plop',
                 },
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/selectors.ts',
+                    path: './src/shared/store/{{dashCase storeName}}/selectors.ts',
                     templateFile: './config/plop/store/selectors.ts.plop',
                 },
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/selectors.test.ts',
+                    path: './src/shared/store/{{dashCase storeName}}/selectors.test.ts',
                     templateFile: './config/plop/store/selectors.test.js.plop',
                 },
                 {
                     type: 'pretty-add',
-                    path: './src/shared/store/{{camelCase storeName}}/types.ts',
+                    path: './src/shared/store/{{dashCase storeName}}/types.ts',
                     templateFile: './config/plop/store/types.ts.plop',
                 },
+                {
+                    type: 'modify',
+                    path: './src/shared/store/root.types.ts',
+                    pattern: /(import.*;)/,
+                    template:
+                        "$1\nimport { {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}Actions, {{camelCase storeName}}InitialState } from './{{dashCase storeName}}/types';\n",
+                },
+                {
+                    type: 'modify',
+                    path: './src/shared/store/root.types.ts',
+                    pattern: /(export const rootInitialState: RootState = {)/,
+                    template: '$1\n{{camelCase storeName}}: {{camelCase storeName}}InitialState,',
+                },
+                {
+                    type: 'modify',
+                    path: './src/shared/store/root.types.ts',
+                    pattern: /(export const RootActionTypes = Object\.assign\((.|\n)*{},)/,
+                    template: '$1 {{pascalCase storeName}}ActionTypes,',
+                },
+                {
+                    type: 'modify',
+                    path: './src/shared/store/root.types.ts',
+                    pattern: /(export type RootActions =)/,
+                    template: '$1 {{pascalCase storeName}}Actions |',
+                },
+                {
+                    type: 'modify',
+                    path: './src/shared/store/root.reducer.ts',
+                    pattern: /(import.*;)/,
+                    template:
+                        "$1\nimport {{camelCase storeName}} from './{{dashCase storeName}}/reducer';\n",
+                },
+                {
+                    type: 'modify',
+                    path: './src/shared/store/root.reducer.ts',
+                    pattern: /(export default combineReducers\({)/,
+                    template: '$1\n{{camelCase storeName}},',
+                },
             ];
-
             return actions;
         },
     });

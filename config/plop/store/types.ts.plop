@@ -1,5 +1,5 @@
-import { {{pascalCase storeName}} } from '../../models/{{camelCase storeName}}.model';
-import { Action } from '../rootTypes';
+import { {{pascalCase storeName}} } from '../../models/{{dashCase storeName}}.model';
+import { Action } from '../root.types';
 
 export type {{pascalCase storeName}}State = {
     didInvalidate: boolean;

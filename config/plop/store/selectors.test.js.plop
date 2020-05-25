@@ -1,4 +1,4 @@
-import { rootInitialState } from '../rootTypes';
+import { rootInitialState } from '../root.types';
 import { {{camelCase storeName}}InitialState } from './types';
 import * as selectors from './selectors';
 

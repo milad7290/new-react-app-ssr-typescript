@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { RootState } from '../rootTypes';
+import { RootState } from '../root.types';
 
 // Cache TTL in Milliseconds
 const CACHE_TTL = 60 * 1000;

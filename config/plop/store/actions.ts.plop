@@ -1,4 +1,4 @@
-import { {{pascalCase storeName}} } from '../../models/{{camelCase storeName}}.model';
+import { {{pascalCase storeName}} } from '../../models/{{dashCase storeName}}.model';
 import { {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}Actions } from './types';
 
 export const {{pascalCase storeName}}Request = (): {{pascalCase storeName}}Actions => ({

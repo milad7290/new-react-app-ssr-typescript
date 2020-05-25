@@ -1,4 +1,4 @@
-import { Action } from '../rootTypes';
+import { Action } from '../root.types';
 
 export type Locale = 'en_US' | 'de_DE';
 
