@@ -158,7 +158,7 @@ module.exports = (plop) => {
                     path: './src/shared/store/root.types.ts',
                     pattern: /(import.*;)/,
                     template:
-                        "$1\nimport { {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}Actions, {{camelCase storeName}}InitialState } from './{{dashCase storeName}}/types';\n",
+                        "$1\nimport { {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}Actions, {{camelCase storeName}}InitialState } from './{{dashCase storeName}}/types';",
                 },
                 {
                     type: 'modify',
@@ -184,7 +184,7 @@ module.exports = (plop) => {
                     path: './src/shared/store/root.reducer.ts',
                     pattern: /(import.*;)/,
                     template:
-                        "$1\nimport {{camelCase storeName}} from './{{dashCase storeName}}/reducer';\n",
+                        "$1\nimport {{camelCase storeName}} from './{{dashCase storeName}}/reducer';",
                 },
                 {
                     type: 'modify',
