@@ -120,11 +120,6 @@ module.exports = (plop) => {
             const actions = [
                 {
                     type: 'pretty-add',
-                    path: './src/shared/models/{{dashCase storeName}}.model.ts',
-                    templateFile: './config/plop/model/model.ts.plop',
-                },
-                {
-                    type: 'pretty-add',
                     path: './src/shared/store/{{dashCase storeName}}/actions.ts',
                     templateFile: './config/plop/store/actions.ts.plop',
                 },
@@ -169,7 +164,8 @@ module.exports = (plop) => {
                     type: 'modify',
                     path: './src/shared/store/root.types.ts',
                     pattern: /(export const rootInitialState: RootState = {)/,
-                    template: '$1\n{{camelCase storeName}}: {{camelCase storeName}}InitialState,',
+                    template:
+                        '$1\n    {{camelCase storeName}}: {{camelCase storeName}}InitialState,',
                 },
                 {
                     type: 'modify',
@@ -194,7 +190,7 @@ module.exports = (plop) => {
                     type: 'modify',
                     path: './src/shared/store/root.reducer.ts',
                     pattern: /(export default combineReducers\({)/,
-                    template: '$1\n{{camelCase storeName}},',
+                    template: '$1\n    {{camelCase storeName}},',
                 },
             ];
             return actions;
