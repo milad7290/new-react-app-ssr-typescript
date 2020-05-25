@@ -5,6 +5,7 @@ export type {{pascalCase storeName}}State = {
     didInvalidate: boolean;
     isLoading: boolean;
     items: {{pascalCase storeName}}[];
+    errors: string[];
     updatedAt: number | null;
 };
 
@@ -12,6 +13,7 @@ export const {{camelCase storeName}}InitialState: {{pascalCase storeName}}State 
     didInvalidate: false,
     isLoading: false,
     items: [],
+    errors: [],
     updatedAt: null,
 });
 
@@ -23,23 +25,24 @@ export enum {{pascalCase storeName}}ActionTypes {
 }
 
 interface {{pascalCase storeName}}RequestAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST,
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST;
 }
 
 interface {{pascalCase storeName}}SuccessAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS,
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS;
     payload: {
-        items: {{pascalCase storeName}}[],
-        updatedAt: number,
-    },
+        items: {{pascalCase storeName}}[];
+        updatedAt: number;
+    };
 }
 
 interface {{pascalCase storeName}}FailureAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE,
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE;
+    payload: { reason: string };
 }
 
 interface {{pascalCase storeName}}InvalidateAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE,
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE;
 }
 
 export type {{pascalCase storeName}}Actions =

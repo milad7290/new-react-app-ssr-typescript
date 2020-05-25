@@ -13,8 +13,9 @@ export const {{pascalCase storeName}}Success = (items: {{pascalCase storeName}}[
     },
 });
 
-export const {{pascalCase storeName}}Failure = (): {{pascalCase storeName}}Actions => ({
+export const {{pascalCase storeName}}Failure = (error?: string): {{pascalCase storeName}}Actions => ({
     type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE,
+    payload: { reason: error || 'Something went wrong!' },
 });
 
 export const {{pascalCase storeName}}Invalidate = (): {{pascalCase storeName}}Actions => ({

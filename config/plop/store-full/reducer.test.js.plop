@@ -1,5 +1,4 @@
-import reducer from './reducer';
-import { {{camelCase storeName}}InitialState, {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}State } from './types';
+import { {{camelCase storeName}}InitialState, {{pascalCase storeName}}State } from './types';
 
 describe('{{pascalCase storeName}} reducer', () => {
     let state: {{pascalCase storeName}}State;

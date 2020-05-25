@@ -30,16 +30,16 @@ export enum {{pascalCase storeName}}ActionTypes {
 }
 
 interface {{pascalCase storeName}}RequestAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST;
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_REQUEST;
 }
 
 interface {{pascalCase storeName}}SuccessAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS;
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_SUCCESS;
     payload: {{pascalCase storeName}}[];
 }
 
 interface {{pascalCase storeName}}FailureAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE;
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_FAILURE;
     payload: { reason: string };
 }
 
@@ -83,4 +83,3 @@ export type {{pascalCase storeName}}Actions =
     | {{pascalCase storeName}}RemoveRequestAction
     | {{pascalCase storeName}}RemoveSuccessAction
     | {{pascalCase storeName}}RemoveFailureAction;
-    
