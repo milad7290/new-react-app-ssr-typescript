@@ -9,9 +9,9 @@ export const appInitialState: AppState = Object.freeze<AppState>({
     locale: 'en_US',
 });
 
-export const AppActionTypes = {
-    SETLOCALE: 'SETLOCALE',
-};
+export enum AppActionTypes {
+    SETLOCALE = 'SETLOCALE',
+}
 interface SetLocaleAction extends Action {
     type: typeof AppActionTypes.SETLOCALE;
     payload: Locale; // error index

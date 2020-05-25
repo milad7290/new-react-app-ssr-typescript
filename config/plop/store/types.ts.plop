@@ -15,7 +15,7 @@ export const {{camelCase storeName}}InitialState: {{pascalCase storeName}}State 
     updatedAt: null,
 });
 
-export const {{pascalCase storeName}}ActionTypes = {
+export enum {{pascalCase storeName}}ActionTypes = {
     {{upperCase (snakeCase storeName) }}_REQUEST: '{{pkg 'name'}}/{{dashCase storeName}}/request',
     {{upperCase (snakeCase storeName) }}_SUCCESS: '{{pkg 'name'}}/{{dashCase storeName}}/success',
     {{upperCase (snakeCase storeName) }}_FAILURE: '{{pkg 'name'}}/{{dashCase storeName}}/failure',

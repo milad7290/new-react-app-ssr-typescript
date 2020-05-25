@@ -10,7 +10,6 @@ export const fetchPosts = (): RootThunk<void> => async (
 ) => {
     dispatch(PostRequest());
     try {
-        // TODO: should be modified
         const posts = await HttpProvider<Post[]>({ url: '/posts' });
 
         dispatch(PostSuccess(posts));
