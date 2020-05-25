@@ -27,18 +27,6 @@ module.exports = (plop) => {
                         './src/shared/components/{{properCase componentName}}/{{properCase componentName}}.test.tsx',
                     templateFile: './config/plop/component/component.test.tsx.plop',
                 },
-                {
-                    type: 'add',
-                    path:
-                        './src/shared/components/{{properCase componentName}}/{{properCase componentName}}.module.css',
-                    templateFile: './config/plop/component/component.module.css.plop',
-                },
-                {
-                    type: 'add',
-                    path:
-                        './src/shared/components/{{properCase componentName}}/{{properCase componentName}}.module.css.d.ts',
-                    templateFile: './config/plop/component/component.module.css.d.ts.plop',
-                },
             ];
 
             return actions;
@@ -66,18 +54,6 @@ module.exports = (plop) => {
                     path:
                         './src/shared/pages/{{properCase pageName}}/{{properCase pageName}}.test.tsx',
                     templateFile: './config/plop/page/page.test.tsx.plop',
-                },
-                {
-                    type: 'add',
-                    path:
-                        './src/shared/pages/{{properCase pageName}}/{{properCase pageName}}.module.css',
-                    templateFile: './config/plop/page/page.module.css.plop',
-                },
-                {
-                    type: 'add',
-                    path:
-                        './src/shared/pages/{{properCase pageName}}/{{properCase pageName}}.module.css.d.ts',
-                    templateFile: './config/plop/page/page.module.css.d.ts.plop',
                 },
             ];
 

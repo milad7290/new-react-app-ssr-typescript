@@ -5,13 +5,13 @@ export async function HttpProvider<T>({
     url,
     data,
     params,
-    method,
+    method = 'GET',
 }: {
     base?: string;
     url: string;
     data?: any;
-    params: any;
-    method: HttpMethod;
+    params?: any;
+    method?: HttpMethod;
 }): Promise<T> {
     const fullUrl = url.startsWith('/') ? `${base}${url}` : `${base}/${url}`;
     const config: AxiosRequestConfig = {

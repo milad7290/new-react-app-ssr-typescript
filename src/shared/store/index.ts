@@ -1,5 +1,6 @@
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
+import logger from 'redux-logger';
 import RootReducer from './root.reducer';
 import { RootState, RootActions } from './root.types';
 
@@ -15,6 +16,10 @@ export const configureStore = ({ initialState, middleware = [] }: StoreParams) =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionsBlacklist: [] });
 
     const composeEnhancers = devtools || compose;
+
+    if (process.env.NODE_ENV !== 'production') {
+        middleware = [...middleware, logger];
+    }
 
     const store = createStore(
         RootReducer,
