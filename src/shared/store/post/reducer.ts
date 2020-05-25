@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 import { ErrorMessage } from '../../providers/global.provider';
-import { PostActions, PostActionTypes, PostState, postInitialState } from './types';
+import { PostActions, PostActionTypes, postInitialState, PostState } from './types';
 
 export default (state: PostState = postInitialState, action: PostActions) =>
     produce(state, (draft) => {
@@ -20,6 +20,10 @@ export default (state: PostState = postInitialState, action: PostActions) =>
                 draft.errors = ErrorMessage(action.payload.reason);
                 return;
 
+            case PostActionTypes.POST_ADD_REQUEST:
+                draft.isLoading = true;
+                return;
+
             case PostActionTypes.POST_UPDATE_REQUEST:
                 draft.items = state.items.map((item) => {
                     if (item.id === action.payload.id) {
@@ -29,7 +33,7 @@ export default (state: PostState = postInitialState, action: PostActions) =>
                 });
                 return;
 
-            case PostActionTypes.POST_UPDATE_SUCCESS:
+            case PostActionTypes.POST_ADD_UPDATE_SUCCESS:
                 draft.items =
                     state.items.findIndex((item) => item.id === action.payload.id) > -1
                         ? state.items.map((item) => {
@@ -48,6 +52,11 @@ export default (state: PostState = postInitialState, action: PostActions) =>
                     }
                     return item;
                 });
+                draft.errors = ErrorMessage(action.payload.reason);
+                return;
+
+            case PostActionTypes.POST_ADD_FAILURE:
+                draft.isLoading = false;
                 draft.errors = ErrorMessage(action.payload.reason);
                 return;
 

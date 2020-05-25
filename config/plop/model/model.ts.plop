@@ -1,3 +1,9 @@
-export interface {{pascalCase modelName}} {
-    id: number;
+import { BaseModel } from './base.model';
+
+export interface {{pascalCase modelName}} extends BaseModel {
+
+}
+
+export interface New{{pascalCase modelName}} {
+
 }

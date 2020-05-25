@@ -1,7 +1,19 @@
 import { Dispatch } from 'react';
 import { HttpProvider } from '../providers/http.provider';
-import { {{pascalCase serviceName}} } from '../../models/{{dashCase serviceName}}.model';
-import { {{pascalCase serviceName}}Failure, {{pascalCase serviceName}}Request, {{pascalCase serviceName}}Success } from '../store/{{dashCase serviceName}}/actions';
+import { {{pascalCase serviceName}}, New{{pascalCase serviceName}} } from '../../models/{{dashCase serviceName}}.model';
+import {
+    {{pascalCase serviceName}}AddFailure,
+    {{pascalCase serviceName}}AddOrUpdateSuccess,
+    {{pascalCase serviceName}}AddRequest,
+    {{pascalCase serviceName}}Failure,
+    {{pascalCase serviceName}}RemoveFailure,
+    {{pascalCase serviceName}}RemoveRequest,
+    {{pascalCase serviceName}}RemoveSuccess,
+    {{pascalCase serviceName}}Request,
+    {{pascalCase serviceName}}Success,
+    {{pascalCase serviceName}}UpdateFailure,
+    {{pascalCase serviceName}}UpdateRequest,
+} from '../store/book/actions';
 import { RootActions, RootState, RootThunk } from '../store/root.types';
 
 export const fetch{{pascalCase serviceName}}s = (): RootThunk<void> => async (
@@ -14,6 +26,48 @@ export const fetch{{pascalCase serviceName}}s = (): RootThunk<void> => async (
 
         dispatch({{pascalCase serviceName}}Success({{camelCase serviceName}}s));
     } catch (error) {
-        dispatch({{pascalCase serviceName}}Failure());
+        dispatch({{pascalCase serviceName}}Failure(error));
+    }
+};
+
+export const add{{pascalCase serviceName}} = (new{{pascalCase serviceName}}: New{{pascalCase serviceName}}): RootThunk<void> => async (
+    dispatch: Dispatch<RootActions>,
+    getState: () => RootState
+) => {
+    dispatch({{pascalCase serviceName}}AddRequest());
+    try {
+        const {{camelCase serviceName}} = await HttpProvider<{{pascalCase serviceName}}>({ url: '/{{camelCase serviceName}}s', method: 'POST', data: new{{pascalCase serviceName}} });
+
+        dispatch({{pascalCase serviceName}}AddOrUpdateSuccess({{camelCase serviceName}}));
+    } catch (error) {
+        dispatch({{pascalCase serviceName}}AddFailure(error));
+    }
+};
+
+export const update{{pascalCase serviceName}} = ({{camelCase serviceName}}: {{pascalCase serviceName}}): RootThunk<void> => async (
+    dispatch: Dispatch<RootActions>,
+    getState: () => RootState
+) => {
+    dispatch({{pascalCase serviceName}}UpdateRequest({{camelCase serviceName}}.id));
+    try {
+        const returned{{pascalCase serviceName}} = await HttpProvider<{{pascalCase serviceName}}>({ url: '/{{camelCase serviceName}}s/' + {{camelCase serviceName}}.id, method: 'PUT' });
+
+        dispatch({{pascalCase serviceName}}AddOrUpdateSuccess(returned{{pascalCase serviceName}}));
+    } catch (error) {
+        dispatch({{pascalCase serviceName}}UpdateFailure({{camelCase serviceName}}.id, error));
+    }
+};
+
+export const remove{{pascalCase serviceName}} = (id: number): RootThunk<void> => async (
+    dispatch: Dispatch<RootActions>,
+    getState: () => RootState
+) => {
+    dispatch({{pascalCase serviceName}}RemoveRequest(id));
+    try {
+        const {{camelCase serviceName}} = await HttpProvider<{{pascalCase serviceName}}>({ url: '/{{camelCase serviceName}}s/' + id, method: 'DELETE' });
+
+        dispatch({{pascalCase serviceName}}RemoveSuccess({{camelCase serviceName}}.id));
+    } catch (error) {
+        dispatch({{pascalCase serviceName}}RemoveFailure(id, error));
     }
 };

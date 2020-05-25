@@ -15,14 +15,23 @@ export const {{pascalCase storeName}}Failure = (error?: string): {{pascalCase st
     payload: { reason: error || 'Something went wrong!' },
 });
 
+export const {{pascalCase storeName}}AddRequest = (): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_REQUEST,
+});
+
 export const {{pascalCase storeName}}UpdateRequest = ({{pascalCase storeName}}Id: number): {{pascalCase storeName}}Actions => ({
     type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST,
     payload: { id: {{pascalCase storeName}}Id },
 });
 
-export const {{pascalCase storeName}}UpdateSuccess = (item: {{pascalCase storeName}}): {{pascalCase storeName}}Actions => ({
-    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_SUCCESS,
+export const {{pascalCase storeName}}AddOrUpdateSuccess = (item: {{pascalCase storeName}}): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_UPDATE_SUCCESS,
     payload: item,
+});
+
+export const {{pascalCase storeName}}AddFailure = (error?: string): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_FAILURE,
+    payload: { reason: error || 'Something went wrong!' },
 });
 
 export const {{pascalCase storeName}}UpdateFailure = ({{pascalCase storeName}}Id: number, error?: string): {{pascalCase storeName}}Actions => ({

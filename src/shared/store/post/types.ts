@@ -21,8 +21,10 @@ export enum PostActionTypes {
     POST_LIST_REQUEST = 'react-ssr-setup/post/request',
     POST_LIST_SUCCESS = 'react-ssr-setup/post/success',
     POST_LIST_FAILURE = 'react-ssr-setup/post/failure',
+    POST_ADD_REQUEST = 'react-ssr-setup/post/add/request',
     POST_UPDATE_REQUEST = 'react-ssr-setup/post/update/request',
-    POST_UPDATE_SUCCESS = 'react-ssr-setup/post/update/success',
+    POST_ADD_UPDATE_SUCCESS = 'react-ssr-setup/post/add-update/success',
+    POST_ADD_FAILURE = 'react-ssr-setup/post/add/failure',
     POST_UPDATE_FAILURE = 'react-ssr-setup/post/update/failure',
     POST_REMOVE_REQUEST = 'react-ssr-setup/post/remove/request',
     POST_REMOVE_SUCCESS = 'react-ssr-setup/post/remove/success',
@@ -42,16 +44,24 @@ interface PostFailureAction extends Action {
     payload: { reason: string };
 }
 
+interface PostAddRequestAction extends Action {
+    type: typeof PostActionTypes.POST_ADD_REQUEST;
+}
+
 interface PostUpdateRequestAction extends Action {
     type: typeof PostActionTypes.POST_UPDATE_REQUEST;
     payload: { id: number };
 }
 
-interface PostUpdateSuccessAction extends Action {
-    type: typeof PostActionTypes.POST_UPDATE_SUCCESS;
+interface PostAddOrUpdateSuccessAction extends Action {
+    type: typeof PostActionTypes.POST_ADD_UPDATE_SUCCESS;
     payload: Post;
 }
 
+interface PostAddFailureAction extends Action {
+    type: typeof PostActionTypes.POST_ADD_FAILURE;
+    payload: { reason: string };
+}
 interface PostUpdateFailureAction extends Action {
     type: typeof PostActionTypes.POST_UPDATE_FAILURE;
     payload: { id: number; reason: string };
@@ -76,8 +86,10 @@ export type PostActions =
     | PostRequestAction
     | PostSuccessAction
     | PostFailureAction
+    | PostAddRequestAction
     | PostUpdateRequestAction
-    | PostUpdateSuccessAction
+    | PostAddOrUpdateSuccessAction
+    | PostAddFailureAction
     | PostUpdateFailureAction
     | PostRemoveRequestAction
     | PostRemoveSuccessAction

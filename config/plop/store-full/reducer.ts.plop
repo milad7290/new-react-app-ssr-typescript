@@ -20,6 +20,10 @@ export default (state: {{pascalCase storeName}}State = {{camelCase storeName}}In
                 draft.errors = ErrorMessage(action.payload.reason);
                 return;
 
+                case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_REQUEST:
+                  draft.isLoading = true;
+                return;
+
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST:
                 draft.items = state.items.map((item) => {
                     if (item.id === action.payload.id) {
@@ -29,7 +33,7 @@ export default (state: {{pascalCase storeName}}State = {{camelCase storeName}}In
                 });
                 return;
 
-            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_SUCCESS:
+            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_UPDATE_SUCCESS:
                 draft.items =
                     state.items.findIndex((item) => item.id === action.payload.id) > -1
                         ? state.items.map((item) => {
@@ -40,6 +44,12 @@ export default (state: {{pascalCase storeName}}State = {{camelCase storeName}}In
                           })
                         : [action.payload, ...state.items];
                 return;
+
+            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_FAILURE:
+                draft.isLoading = false;
+                draft.errors = ErrorMessage(action.payload.reason);
+                return;
+
 
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_FAILURE:
                 draft.items = state.items.map((item) => {
