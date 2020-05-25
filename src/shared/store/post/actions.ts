@@ -22,7 +22,7 @@ export const PostUpdateRequest = (postId: number): PostActions => ({
 
 export const PostUpdateSuccess = (item: Post): PostActions => ({
     type: PostActionTypes.POST_UPDATE_SUCCESS,
-    payload: items,
+    payload: item,
 });
 
 export const PostUpdateFailure = (postId: number, error?: string): PostActions => ({

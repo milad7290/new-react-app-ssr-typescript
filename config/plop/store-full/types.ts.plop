@@ -1,0 +1,86 @@
+import { {{pascalCase storeName}} } from '../../models/{{dashCase storeName}}.model';
+import { Action } from '../root.types';
+
+export type {{pascalCase storeName}}State = {
+    fetchLimit: number;
+    isLoading: boolean;
+    items: {{pascalCase storeName}}[];
+    errors: string[];
+    lastOneFetched: boolean;
+};
+
+export const {{camelCase storeName}}InitialState: {{pascalCase storeName}}State = Object.freeze({
+    fetchLimit: 25,
+    isLoading: false,
+    items: [],
+    errors: [],
+    lastOneFetched: false,
+});
+
+export enum {{pascalCase storeName}}ActionTypes {
+    {{upperCase (snakeCase storeName) }}_LIST_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/list/request',
+    {{upperCase (snakeCase storeName) }}_LIST_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/list/success',
+    {{upperCase (snakeCase storeName) }}_LIST_FAILURE = '{{pkg 'name'}}/{{dashCase storeName}}/list/failure',
+    {{upperCase (snakeCase storeName) }}_UPDATE_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/update/request',
+    {{upperCase (snakeCase storeName) }}_UPDATE_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/update/success',
+    {{upperCase (snakeCase storeName) }}_UPDATE_FAILURE = '{{pkg 'name'}}/{{dashCase storeName}}/update/failure',
+    {{upperCase (snakeCase storeName) }}_REMOVE_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/remove/request',
+    {{upperCase (snakeCase storeName) }}_REMOVE_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/remove/success',
+    {{upperCase (snakeCase storeName) }}_REMOVE_FAILURE = '{{pkg 'name'}}/{{dashCase storeName}}/remove/failure',
+}
+
+interface {{pascalCase storeName}}RequestAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST;
+}
+
+interface {{pascalCase storeName}}SuccessAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS;
+    payload: {{pascalCase storeName}}[];
+}
+
+interface {{pascalCase storeName}}FailureAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE;
+    payload: { reason: string };
+}
+
+interface {{pascalCase storeName}}UpdateRequestAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST;
+    payload: { id: number };
+}
+
+interface {{pascalCase storeName}}UpdateSuccessAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_SUCCESS;
+    payload: {{pascalCase storeName}};
+}
+
+interface {{pascalCase storeName}}UpdateFailureAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_FAILURE;
+    payload: { id: number; reason: string };
+}
+
+interface {{pascalCase storeName}}RemoveRequestAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REMOVE_REQUEST;
+    payload: { id: number };
+}
+
+interface {{pascalCase storeName}}RemoveSuccessAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REMOVE_SUCCESS;
+    payload: { id: number };
+}
+
+interface {{pascalCase storeName}}RemoveFailureAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REMOVE_FAILURE;
+    payload: { id: number; reason: string };
+}
+
+export type {{pascalCase storeName}}Actions =
+    | {{pascalCase storeName}}RequestAction
+    | {{pascalCase storeName}}SuccessAction
+    | {{pascalCase storeName}}FailureAction
+    | {{pascalCase storeName}}UpdateRequestAction
+    | {{pascalCase storeName}}UpdateSuccessAction
+    | {{pascalCase storeName}}UpdateFailureAction
+    | {{pascalCase storeName}}RemoveRequestAction
+    | {{pascalCase storeName}}RemoveSuccessAction
+    | {{pascalCase storeName}}RemoveFailureAction;
+    

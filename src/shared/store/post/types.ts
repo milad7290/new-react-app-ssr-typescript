@@ -64,7 +64,7 @@ interface PostRemoveRequestAction extends Action {
 
 interface PostRemoveSuccessAction extends Action {
     type: typeof PostActionTypes.POST_REMOVE_SUCCESS;
-    payload: Post;
+    payload: { id: number };
 }
 
 interface PostRemoveFailureAction extends Action {

@@ -1,0 +1,9 @@
+import { rootInitialState } from '../root.types';
+import { {{camelCase storeName}}InitialState } from './types';
+import * as selectors from './selectors';
+
+describe('{{camelCase storeName}} selectors', () => {
+    it('should select the {{camelCase storeName}} branch of the state', () => {
+        expect(selectors.get{{pascalCase storeName}}(rootInitialState)).toEqual({{camelCase storeName}}InitialState);
+    });
+});

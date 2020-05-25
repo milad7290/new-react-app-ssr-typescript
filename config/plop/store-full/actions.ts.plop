@@ -1,0 +1,46 @@
+import { {{pascalCase storeName}} } from '../../models/{{dashCase storeName}}.model';
+import { {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}Actions } from './types';
+
+export const {{pascalCase storeName}}Request = (): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_REQUEST,
+});
+
+export const {{pascalCase storeName}}Success = (items: {{pascalCase storeName}}[]): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_SUCCESS,
+    payload: items,
+});
+
+export const {{pascalCase storeName}}Failure = (error?: string): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_FAILURE,
+    payload: { reason: error || 'Something went wrong!' },
+});
+
+export const {{pascalCase storeName}}UpdateRequest = ({{pascalCase storeName}}Id: number): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST,
+    payload: { id: {{pascalCase storeName}}Id },
+});
+
+export const {{pascalCase storeName}}UpdateSuccess = (item: {{pascalCase storeName}}): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_SUCCESS,
+    payload: item,
+});
+
+export const {{pascalCase storeName}}UpdateFailure = ({{pascalCase storeName}}Id: number, error?: string): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_FAILURE,
+    payload: { id: {{pascalCase storeName}}Id, reason: error || 'Something went wrong!' },
+});
+
+export const {{pascalCase storeName}}RemoveRequest = ({{pascalCase storeName}}Id: number): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REMOVE_REQUEST,
+    payload: { id: {{pascalCase storeName}}Id },
+});
+
+export const {{pascalCase storeName}}RemoveSuccess = ({{pascalCase storeName}}Id: number): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REMOVE_SUCCESS,
+    payload: { id: {{pascalCase storeName}}Id },
+});
+
+export const {{pascalCase storeName}}RemoveFailure = ({{pascalCase storeName}}Id: number, error?: string): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REMOVE_FAILURE,
+    payload: { id: {{pascalCase storeName}}Id, reason: error || 'Something went wrong!' },
+});

@@ -1,0 +1,15 @@
+import { createSelector } from 'reselect';
+import { RootState } from '../root.types';
+
+export const get{{pascalCase storeName}} = (state: RootState) => state.{{camelCase storeName}} || {};
+
+export const get{{pascalCase storeName}}Items = createSelector(
+    [get{{pascalCase storeName}}],
+    ({{camelCase storeName}}) => {
+        return {{camelCase storeName}}.items;
+    }
+);
+
+export const isLoading = createSelector([get{{pascalCase storeName}}], ({{camelCase storeName}}) => {
+    return {{camelCase storeName}}.isLoading;
+});
