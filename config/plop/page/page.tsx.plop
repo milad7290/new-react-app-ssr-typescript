@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import css from './{{pascalCase pageName}}.module.css';
 
-const {{pascalCase pageName}} = (props: any) => {
+const {{pascalCase pageName}} : React.FC<any> = () => {
     const { t } = useTranslation();
 
     return (<React.Fragment>

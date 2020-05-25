@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-// import css from './ErrorBoundary';
+import css from './ErrorBoundary.module.css';
 
 export class ErrorBoundary extends PureComponent {
     state = {
@@ -18,7 +18,7 @@ export class ErrorBoundary extends PureComponent {
         const { hasError } = this.state;
 
         if (hasError) {
-            return <p className="{problem}">مشکلی برای این قسمت سایت به وجود آمده است</p>;
+            return <p className={css.problem}>مشکلی برای این قسمت سایت به وجود آمده است</p>;
         }
 
         return this.props.children;
