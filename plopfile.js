@@ -33,6 +33,35 @@ module.exports = (plop) => {
         },
     });
 
+    plop.setGenerator('React Component Whit Loading', {
+        description: 'Create a new React component',
+        prompts: [
+            {
+                type: 'prompt',
+                name: 'componentName',
+                message: 'Name of your component:',
+            },
+        ],
+        actions: () => {
+            const actions = [
+                {
+                    type: 'pretty-add',
+                    path:
+                        './src/shared/components/{{properCase componentName}}/{{properCase componentName}}.tsx',
+                    templateFile: './config/plop/component/component-with-loading.tsx.plop',
+                },
+                {
+                    type: 'pretty-add',
+                    path:
+                        './src/shared/components/{{properCase componentName}}/{{properCase componentName}}.test.tsx',
+                    templateFile: './config/plop/component/component.test.tsx.plop',
+                },
+            ];
+
+            return actions;
+        },
+    });
+
     plop.setGenerator('React Page', {
         description: 'Create a new React page',
         prompts: [
@@ -169,6 +198,28 @@ module.exports = (plop) => {
                     template: '$1\n    {{camelCase storeName}},',
                 },
             ];
+            return actions;
+        },
+    });
+
+    plop.setGenerator('React Service', {
+        description: 'Create a new React service',
+        prompts: [
+            {
+                type: 'prompt',
+                name: 'serviceName',
+                message: 'Name of your service:',
+            },
+        ],
+        actions: () => {
+            const actions = [
+                {
+                    type: 'add',
+                    path: './src/shared/services/{{dashCase serviceName}}.service.ts',
+                    templateFile: './config/plop/service/service.service.ts.plop',
+                },
+            ];
+
             return actions;
         },
     });

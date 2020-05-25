@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import css from './{{pascalCase pageName}}.module.css';
 
 const {{pascalCase pageName}} : React.FC<any> = () => {
     const { t } = useTranslation();
 
     return (<React.Fragment>
-    <h2 className={css.test}>{t('features')}</h2>
+    <h2>{t('features')}</h2>
 
 </React.Fragment>);
 };

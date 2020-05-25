@@ -1,0 +1,19 @@
+import { Dispatch } from 'react';
+import { HttpProvider } from '../providers/http.provider';
+import { {{pascalCase serviceName}} } from '../../models/{{dashCase serviceName}}.model';
+import { {{pascalCase serviceName}}Failure, {{pascalCase serviceName}}Request, {{pascalCase serviceName}}Success } from '../store/{{dashCase serviceName}}/actions';
+import { RootActions, RootState, RootThunk } from '../store/root.types';
+
+export const fetch{{pascalCase serviceName}}s = (): RootThunk<void> => async (
+    dispatch: Dispatch<RootActions>,
+    getState: () => RootState
+) => {
+    dispatch({{pascalCase serviceName}}Request());
+    try {
+        const {{camelCase serviceName}}s = await HttpProvider<{{pascalCase serviceName}}[]>({ url: '/{{camelCase serviceName}}s' });
+
+        dispatch({{pascalCase serviceName}}Success({{camelCase serviceName}}s));
+    } catch (error) {
+        dispatch({{pascalCase serviceName}}Failure());
+    }
+};
