@@ -1,24 +1,24 @@
-import reducer, { initialState } from './reducer';
-import { ActionTypes } from './actions';
+import reducer from './reducer';
+import { {{camelCase storeName}}InitialState, {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}State } from './types';
 
 describe('{{pascalCase storeName}} reducer', () => {
-    let state = reducer(undefined, {});
+    let state: {{pascalCase storeName}}State;
 
     beforeEach(() => {
-        state = { ...initialState };
+        state = { ...{{camelCase storeName}}InitialState };
     });
 
     it('should return the initial state', () => {
-        expect(initialState).toEqual(state);
+        expect({{camelCase storeName}}InitialState).toEqual(state);
     });
 
     it('should change into loading state', () => {
         state.isLoading = true;
-        expect(reducer(undefined, { type: ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST })).toEqual(state);
+        expect(reducer(undefined, { type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST })).toEqual(state);
     });
 
     it('should invalidate the data in the store', () => {
         state.didInvalidate = true;
-        expect(reducer(undefined, { type: ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE })).toEqual(state);
+        expect(reducer(undefined, { type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE })).toEqual(state);
     });
 });

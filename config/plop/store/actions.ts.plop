@@ -1,26 +1,22 @@
-export const ActionTypes = {
-    {{upperCase (snakeCase storeName) }}_REQUEST: '{{pkg 'name'}}/{{dashCase storeName}}/request',
-    {{upperCase (snakeCase storeName) }}_SUCCESS: '{{pkg 'name'}}/{{dashCase storeName}}/success',
-    {{upperCase (snakeCase storeName) }}_FAILURE: '{{pkg 'name'}}/{{dashCase storeName}}/failure',
-    {{upperCase (snakeCase storeName) }}_INVALIDATE: '{{pkg 'name'}}/{{dashCase storeName}}/invalidate',
-};
+import { {{pascalCase storeName}} } from '../../models/{{camelCase storeName}}.model';
+import { {{pascalCase storeName}}ActionTypes, {{pascalCase storeName}}Actions } from './types';
 
-export const {{pascalCase storeName}}Request = () => ({
-    type: ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST,
+export const {{pascalCase storeName}}Request = (): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST,
 });
 
-export const {{pascalCase storeName}}Success = (items: {{pascalCase storeName}}[]) => ({
-    type: ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS,
+export const {{pascalCase storeName}}Success = (items: {{pascalCase storeName}}[]): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS,
     payload: {
         items,
         updatedAt: Number(Date.now()),
     },
 });
 
-export const {{pascalCase storeName}}Failure = () => ({
-    type: ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE,
+export const {{pascalCase storeName}}Failure = (): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE,
 });
 
-export const {{pascalCase storeName}}Invalidate = () => ({
-    type: ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE,
+export const {{pascalCase storeName}}Invalidate = (): {{pascalCase storeName}}Actions => ({
+    type: {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE,
 });

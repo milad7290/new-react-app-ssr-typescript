@@ -1,14 +1,10 @@
 import { produce } from 'immer';
-import { AppActionTypes, AppState, SETLOCALE } from './types';
+import { AppActions, AppState, AppActionTypes, appInitialState } from './types';
 
-export const initialState = Object.freeze<AppState>({
-    locale: 'en_US',
-});
-
-export default (state: AppState = initialState, action: AppActionTypes): AppState =>
+export default (state: AppState = appInitialState, action: AppActions): AppState =>
     produce(state, (draft) => {
         switch (action.type) {
-            case SETLOCALE: {
+            case AppActionTypes.SETLOCALE: {
                 draft.locale = action.payload;
                 return;
             }

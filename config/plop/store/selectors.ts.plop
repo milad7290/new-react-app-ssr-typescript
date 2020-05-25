@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
-import { {{pascalCase storeName}} } from './types';
+import { RootState } from '../rootTypes';
 
 // Cache TTL in Milliseconds
 const CACHE_TTL = 60 * 1000;
 
-export const get{{pascalCase storeName}} = (state: { {{camelCase storeName}}: {{pascalCase storeName}} }) => state.{{camelCase storeName}} || {};
+export const get{{pascalCase storeName}} = (state: RootState) => state.{{camelCase storeName}} || {};
 
 export const get{{pascalCase storeName}}Items = createSelector(
     [get{{pascalCase storeName}}],
@@ -13,7 +13,7 @@ export const get{{pascalCase storeName}}Items = createSelector(
     }
 );
 
-export const isExpired = (state: { {{camelCase storeName}}: {{pascalCase storeName}} }): boolean => {
+export const isExpired = (state: RootState): boolean => {
     const { updatedAt, didInvalidate } = get{{pascalCase storeName}}(state);
     if (didInvalidate === true || !updatedAt || Date.now() - updatedAt > CACHE_TTL) {
         return true;

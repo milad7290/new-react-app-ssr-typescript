@@ -1,19 +1,49 @@
-export type {{pascalCase storeName}} = {
+import { {{pascalCase storeName}} } from '../../models/{{camelCase storeName}}.model';
+import { Action } from '../rootTypes';
+
+export type {{pascalCase storeName}}State = {
     didInvalidate: boolean;
     isLoading: boolean;
     items: {{pascalCase storeName}}[];
     updatedAt: number | null;
 };
 
-export type GenericAction = {
-    type:
-        | '{{pkg 'name'}}/{{dashCase storeName}}/request'
-        | '{{pkg 'name'}}/{{dashCase storeName}}/invalidate'
-        | '{{pkg 'name'}}/{{dashCase storeName}}/success'
-        | '{{pkg 'name'}}/{{dashCase storeName}}/failaure';
-    payload?: any;
-    meta?: any;
-    error?: boolean;
-};
+export const {{camelCase storeName}}InitialState: {{pascalCase storeName}}State = Object.freeze({
+    didInvalidate: false,
+    isLoading: false,
+    items: [],
+    updatedAt: null,
+});
 
-export type Action = GenericAction;
+export const {{pascalCase storeName}}ActionTypes = {
+    {{upperCase (snakeCase storeName) }}_REQUEST: '{{pkg 'name'}}/{{dashCase storeName}}/request',
+    {{upperCase (snakeCase storeName) }}_SUCCESS: '{{pkg 'name'}}/{{dashCase storeName}}/success',
+    {{upperCase (snakeCase storeName) }}_FAILURE: '{{pkg 'name'}}/{{dashCase storeName}}/failure',
+    {{upperCase (snakeCase storeName) }}_INVALIDATE: '{{pkg 'name'}}/{{dashCase storeName}}/invalidate',
+}
+
+interface {{pascalCase storeName}}RequestAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_REQUEST,
+}
+
+interface {{pascalCase storeName}}SuccessAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_SUCCESS,
+    payload: {
+        items: {{pascalCase storeName}}[],
+        updatedAt: number,
+    },
+}
+
+interface {{pascalCase storeName}}FailureAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_FAILURE,
+}
+
+interface {{pascalCase storeName}}InvalidateAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_INVALIDATE,
+}
+
+export type {{pascalCase storeName}}Actions =
+    | {{pascalCase storeName}}RequestAction
+    | {{pascalCase storeName}}SuccessAction
+    | {{pascalCase storeName}}FailureAction
+    | {{pascalCase storeName}}InvalidateAction;

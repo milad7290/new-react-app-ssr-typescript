@@ -1,6 +1,6 @@
-import { Locale, AppActionTypes, SETLOCALE } from './types';
+import { Locale, AppActionTypes, AppActions } from './types';
 
-export const setLocale = (locale: Locale): AppActionTypes => ({
-    type: SETLOCALE,
+export const setLocale = (locale: Locale): AppActions => ({
+    type: AppActionTypes.SETLOCALE,
     payload: locale,
 });

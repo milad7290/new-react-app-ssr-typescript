@@ -1,12 +1,9 @@
-import reducer from '../rootReducer';
-import { initialState } from './reducer';
+import { rootInitialState } from '../rootTypes';
+import { {{camelCase storeName}}InitialState } from './types';
 import * as selectors from './selectors';
-
-const fullState = reducer(undefined, {});
 
 describe('{{camelCase storeName}} selectors', () => {
     it('should select the {{camelCase storeName}} branch of the state', () => {
-        const state = selectors.get{{pascalCase storeName}}(fullState);
-        expect(state).toEqual(initialState);
+        expect(selectors.get{{pascalCase storeName}}(rootInitialState)).toEqual({{camelCase storeName}}InitialState);
     });
 });

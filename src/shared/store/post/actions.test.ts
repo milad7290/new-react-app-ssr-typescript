@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { {{camelCase storeName}}InitialState } } from './types';
+import { postInitialState } from './types';
 
 import * as Actions from './actions';
 
@@ -9,6 +9,6 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Your test', () => {
     it('should do something', () => {
-        const store = mockStore({ {{pascalCase storeName}}: {{camelCase storeName}}InitialState });
+        const store = mockStore({ Post: postInitialState });
     });
 });
