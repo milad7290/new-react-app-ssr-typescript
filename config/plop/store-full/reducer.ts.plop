@@ -6,13 +6,19 @@ export default (state: {{pascalCase storeName}}State = {{camelCase storeName}}In
     produce(state, (draft) => {
         switch (action.type) {
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_REQUEST:
-                draft.isLoading = true;
+                if (state.updatedAt) {
+                    draft.isLoadingMore = true;
+                } else {
+                    draft.isLoading = true;
+                }
                 return;
 
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_SUCCESS:
-                draft.items = [...state.items, ...action.payload];
+                draft.items = [...state.items, ...action.payload.items];
                 draft.isLoading = false;
-                draft.lastOneFetched = action.payload.length < state.fetchLimit;
+                draft.isLoadingMore = false;
+                draft.lastOneFetched = action.payload.items.length < state.fetchLimit;
+                draft.updatedAt = action.payload.updatedAt;
                 return;
 
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_FAILURE:
@@ -20,8 +26,20 @@ export default (state: {{pascalCase storeName}}State = {{camelCase storeName}}In
                 draft.errors = ErrorMessage(action.payload.reason);
                 return;
 
-                case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_REQUEST:
-                  draft.isLoading = true;
+            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_REQUEST:
+                draft.isLoading = true;
+                return;
+
+            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_SUCCESS:
+                if (state.updatedAt) {
+                    draft.items = [action.payload, ...state.items];
+                }
+                state.isLoading = false;
+                return;
+
+            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_FAILURE:
+                draft.isLoading = false;
+                draft.errors = ErrorMessage(action.payload.reason);
                 return;
 
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST:
@@ -33,23 +51,14 @@ export default (state: {{pascalCase storeName}}State = {{camelCase storeName}}In
                 });
                 return;
 
-            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_UPDATE_SUCCESS:
-                draft.items =
-                    state.items.findIndex((item) => item.id === action.payload.id) > -1
-                        ? state.items.map((item) => {
-                              if (item.id === action.payload.id) {
-                                  return action.payload;
-                              }
-                              return item;
-                          })
-                        : [action.payload, ...state.items];
+            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_SUCCESS:
+                draft.items = state.items.map((item) => {
+                    if (item.id === action.payload.id) {
+                        return action.payload;
+                    }
+                    return item;
+                });
                 return;
-
-            case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_FAILURE:
-                draft.isLoading = false;
-                draft.errors = ErrorMessage(action.payload.reason);
-                return;
-
 
             case {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_FAILURE:
                 draft.items = state.items.map((item) => {

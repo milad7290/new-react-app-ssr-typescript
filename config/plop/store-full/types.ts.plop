@@ -4,17 +4,21 @@ import { Action } from '../root.types';
 export type {{pascalCase storeName}}State = {
     fetchLimit: number;
     isLoading: boolean;
+    isLoadingMore: boolean;
     items: {{pascalCase storeName}}[];
     errors: string[];
     lastOneFetched: boolean;
+    updatedAt: number | null;
 };
 
 export const {{camelCase storeName}}InitialState: {{pascalCase storeName}}State = Object.freeze({
     fetchLimit: 25,
     isLoading: false,
+    isLoadingMore: false,
     items: [],
     errors: [],
     lastOneFetched: false,
+    updatedAt: null,
 });
 
 export enum {{pascalCase storeName}}ActionTypes {
@@ -22,9 +26,10 @@ export enum {{pascalCase storeName}}ActionTypes {
     {{upperCase (snakeCase storeName) }}_LIST_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/list/success',
     {{upperCase (snakeCase storeName) }}_LIST_FAILURE = '{{pkg 'name'}}/{{dashCase storeName}}/list/failure',
     {{upperCase (snakeCase storeName) }}_ADD_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/add/request',
-    {{upperCase (snakeCase storeName) }}_UPDATE_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/update/request',
-    {{upperCase (snakeCase storeName) }}_ADD_UPDATE_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/add-update/success',
+    {{upperCase (snakeCase storeName) }}_ADD_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/add/success',
     {{upperCase (snakeCase storeName) }}_ADD_FAILURE = '{{pkg 'name'}}/{{dashCase storeName}}/add/failure',
+    {{upperCase (snakeCase storeName) }}_UPDATE_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/update/request',
+    {{upperCase (snakeCase storeName) }}_UPDATE_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/update/success',
     {{upperCase (snakeCase storeName) }}_UPDATE_FAILURE = '{{pkg 'name'}}/{{dashCase storeName}}/update/failure',
     {{upperCase (snakeCase storeName) }}_REMOVE_REQUEST = '{{pkg 'name'}}/{{dashCase storeName}}/remove/request',
     {{upperCase (snakeCase storeName) }}_REMOVE_SUCCESS = '{{pkg 'name'}}/{{dashCase storeName}}/remove/success',
@@ -37,7 +42,10 @@ interface {{pascalCase storeName}}RequestAction extends Action {
 
 interface {{pascalCase storeName}}SuccessAction extends Action {
     type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_LIST_SUCCESS;
-    payload: {{pascalCase storeName}}[];
+    payload: {
+        items: {{pascalCase storeName}}[];
+        updatedAt: number;
+    };
 }
 
 interface {{pascalCase storeName}}FailureAction extends Action {
@@ -49,19 +57,24 @@ interface {{pascalCase storeName}}AddRequestAction extends Action {
     type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_REQUEST;
 }
 
-interface {{pascalCase storeName}}UpdateRequestAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST;
-    payload: { id: number };
-}
-
-interface {{pascalCase storeName}}AddOrUpdateSuccessAction extends Action {
-    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_UPDATE_SUCCESS;
+interface {{pascalCase storeName}}AddSuccessAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_SUCCESS;
     payload: {{pascalCase storeName}};
 }
 
 interface {{pascalCase storeName}}AddFailureAction extends Action {
     type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_ADD_FAILURE;
     payload: { reason: string };
+}
+
+interface {{pascalCase storeName}}UpdateRequestAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_REQUEST;
+    payload: { id: number };
+}
+
+interface {{pascalCase storeName}}UpdateSuccessAction extends Action {
+    type: typeof {{pascalCase storeName}}ActionTypes.{{upperCase (snakeCase storeName)}}_UPDATE_SUCCESS;
+    payload: {{pascalCase storeName}};
 }
 
 interface {{pascalCase storeName}}UpdateFailureAction extends Action {
@@ -89,9 +102,10 @@ export type {{pascalCase storeName}}Actions =
     | {{pascalCase storeName}}SuccessAction
     | {{pascalCase storeName}}FailureAction
     | {{pascalCase storeName}}AddRequestAction
-    | {{pascalCase storeName}}UpdateRequestAction
-    | {{pascalCase storeName}}AddOrUpdateSuccessAction
+    | {{pascalCase storeName}}AddSuccessAction
     | {{pascalCase storeName}}AddFailureAction
+    | {{pascalCase storeName}}UpdateRequestAction
+    | {{pascalCase storeName}}UpdateSuccessAction
     | {{pascalCase storeName}}UpdateFailureAction
     | {{pascalCase storeName}}RemoveRequestAction
     | {{pascalCase storeName}}RemoveSuccessAction

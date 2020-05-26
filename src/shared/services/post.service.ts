@@ -1,36 +1,37 @@
 import { Dispatch } from 'react';
-import { NewPost, Post } from '../models/post.model';
+import { Post } from '../models/post.model';
 import { HttpProvider } from '../providers/http.provider';
+import { RootActions, RootState, RootThunk } from '../store/root.types';
 import {
-    PostAddFailure,
-    PostAddOrUpdateSuccess,
+    PostListRequest,
+    PostListSuccess,
+    PostListFailure,
     PostAddRequest,
-    PostFailure,
-    PostRemoveFailure,
+    PostAddSuccess,
+    PostAddFailure,
+    PostUpdateRequest,
+    PostUpdateSuccess,
+    PostUpdateFailure,
     PostRemoveRequest,
     PostRemoveSuccess,
-    PostRequest,
-    PostSuccess,
-    PostUpdateFailure,
-    PostUpdateRequest,
+    PostRemoveFailure,
 } from '../store/post/actions';
-import { RootActions, RootState, RootThunk } from '../store/root.types';
 
 export const fetchPosts = (): RootThunk<void> => async (
     dispatch: Dispatch<RootActions>,
     getState: () => RootState
 ) => {
-    dispatch(PostRequest());
+    dispatch(PostListRequest());
     try {
-        const posts = await HttpProvider<Array<Post>>({ url: '/posts' });
+        const posts = await HttpProvider<Post[]>({ url: '/posts' });
 
-        dispatch(PostSuccess(posts));
+        dispatch(PostListSuccess(posts));
     } catch (error) {
-        dispatch(PostFailure(error));
+        dispatch(PostListFailure(error));
     }
 };
 
-export const addPost = (newPost: NewPost): RootThunk<void> => async (
+export const addPost = (newPost: Partial<Post>): RootThunk<void> => async (
     dispatch: Dispatch<RootActions>,
     getState: () => RootState
 ) => {
@@ -38,7 +39,7 @@ export const addPost = (newPost: NewPost): RootThunk<void> => async (
     try {
         const post = await HttpProvider<Post>({ url: '/posts', method: 'POST', data: newPost });
 
-        dispatch(PostAddOrUpdateSuccess(post));
+        dispatch(PostAddSuccess(post));
     } catch (error) {
         dispatch(PostAddFailure(error));
     }
@@ -52,7 +53,7 @@ export const updatePost = (post: Post): RootThunk<void> => async (
     try {
         const returnedPost = await HttpProvider<Post>({ url: '/posts/' + post.id, method: 'PUT' });
 
-        dispatch(PostAddOrUpdateSuccess(returnedPost));
+        dispatch(PostUpdateSuccess(returnedPost));
     } catch (error) {
         dispatch(PostUpdateFailure(post.id, error));
     }

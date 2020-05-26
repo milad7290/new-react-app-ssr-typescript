@@ -1,36 +1,37 @@
 import { Dispatch } from 'react';
 import { HttpProvider } from '../providers/http.provider';
-import { {{pascalCase serviceName}}, New{{pascalCase serviceName}} } from '../../models/{{dashCase serviceName}}.model';
+import { {{pascalCase serviceName}}, New{{pascalCase serviceName}} } from '../models/{{dashCase serviceName}}.model';
 import {
-    {{pascalCase serviceName}}AddFailure,
-    {{pascalCase serviceName}}AddOrUpdateSuccess,
+    {{pascalCase serviceName}}ListRequest,
+    {{pascalCase serviceName}}ListSuccess,
+    {{pascalCase serviceName}}ListFailure,
     {{pascalCase serviceName}}AddRequest,
-    {{pascalCase serviceName}}Failure,
-    {{pascalCase serviceName}}RemoveFailure,
+    {{pascalCase serviceName}}AddSuccess,
+    {{pascalCase serviceName}}AddFailure,
+    {{pascalCase serviceName}}UpdateRequest,
+    {{pascalCase serviceName}}UpdateSuccess,
+    {{pascalCase serviceName}}UpdateFailure,
     {{pascalCase serviceName}}RemoveRequest,
     {{pascalCase serviceName}}RemoveSuccess,
-    {{pascalCase serviceName}}Request,
-    {{pascalCase serviceName}}Success,
-    {{pascalCase serviceName}}UpdateFailure,
-    {{pascalCase serviceName}}UpdateRequest,
-} from '../store/book/actions';
+    {{pascalCase serviceName}}RemoveFailure,
+} from '../store/{{dashCase serviceName}}/actions';
 import { RootActions, RootState, RootThunk } from '../store/root.types';
 
 export const fetch{{pascalCase serviceName}}s = (): RootThunk<void> => async (
     dispatch: Dispatch<RootActions>,
     getState: () => RootState
 ) => {
-    dispatch({{pascalCase serviceName}}Request());
+    dispatch({{pascalCase serviceName}}ListRequest());
     try {
         const {{camelCase serviceName}}s = await HttpProvider<{{pascalCase serviceName}}[]>({ url: '/{{camelCase serviceName}}s' });
 
-        dispatch({{pascalCase serviceName}}Success({{camelCase serviceName}}s));
+        dispatch({{pascalCase serviceName}}ListSuccess({{camelCase serviceName}}s));
     } catch (error) {
-        dispatch({{pascalCase serviceName}}Failure(error));
+        dispatch({{pascalCase serviceName}}ListFailure(error));
     }
 };
 
-export const add{{pascalCase serviceName}} = (new{{pascalCase serviceName}}: New{{pascalCase serviceName}}): RootThunk<void> => async (
+export const add{{pascalCase serviceName}} = (new{{pascalCase serviceName}}: Partial<{{pascalCase serviceName}}>): RootThunk<void> => async (
     dispatch: Dispatch<RootActions>,
     getState: () => RootState
 ) => {
@@ -38,7 +39,7 @@ export const add{{pascalCase serviceName}} = (new{{pascalCase serviceName}}: New
     try {
         const {{camelCase serviceName}} = await HttpProvider<{{pascalCase serviceName}}>({ url: '/{{camelCase serviceName}}s', method: 'POST', data: new{{pascalCase serviceName}} });
 
-        dispatch({{pascalCase serviceName}}AddOrUpdateSuccess({{camelCase serviceName}}));
+        dispatch({{pascalCase serviceName}}AddSuccess({{camelCase serviceName}}));
     } catch (error) {
         dispatch({{pascalCase serviceName}}AddFailure(error));
     }
@@ -52,7 +53,7 @@ export const update{{pascalCase serviceName}} = ({{camelCase serviceName}}: {{pa
     try {
         const returned{{pascalCase serviceName}} = await HttpProvider<{{pascalCase serviceName}}>({ url: '/{{camelCase serviceName}}s/' + {{camelCase serviceName}}.id, method: 'PUT' });
 
-        dispatch({{pascalCase serviceName}}AddOrUpdateSuccess(returned{{pascalCase serviceName}}));
+        dispatch({{pascalCase serviceName}}UpdateSuccess(returned{{pascalCase serviceName}}));
     } catch (error) {
         dispatch({{pascalCase serviceName}}UpdateFailure({{camelCase serviceName}}.id, error));
     }

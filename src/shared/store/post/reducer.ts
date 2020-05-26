@@ -6,13 +6,19 @@ export default (state: PostState = postInitialState, action: PostActions) =>
     produce(state, (draft) => {
         switch (action.type) {
             case PostActionTypes.POST_LIST_REQUEST:
-                draft.isLoading = true;
+                if (state.updatedAt) {
+                    draft.isLoadingMore = true;
+                } else {
+                    draft.isLoading = true;
+                }
                 return;
 
             case PostActionTypes.POST_LIST_SUCCESS:
-                draft.items = [...state.items, ...action.payload];
+                draft.items = [...state.items, ...action.payload.items];
                 draft.isLoading = false;
-                draft.lastOneFetched = action.payload.length < state.fetchLimit;
+                draft.isLoadingMore = false;
+                draft.lastOneFetched = action.payload.items.length < state.fetchLimit;
+                draft.updatedAt = action.payload.updatedAt;
                 return;
 
             case PostActionTypes.POST_LIST_FAILURE:
@@ -24,6 +30,18 @@ export default (state: PostState = postInitialState, action: PostActions) =>
                 draft.isLoading = true;
                 return;
 
+            case PostActionTypes.POST_ADD_SUCCESS:
+                if (state.updatedAt) {
+                    draft.items = [action.payload, ...state.items];
+                }
+                state.isLoading = false;
+                return;
+
+            case PostActionTypes.POST_ADD_FAILURE:
+                draft.isLoading = false;
+                draft.errors = ErrorMessage(action.payload.reason);
+                return;
+
             case PostActionTypes.POST_UPDATE_REQUEST:
                 draft.items = state.items.map((item) => {
                     if (item.id === action.payload.id) {
@@ -33,16 +51,13 @@ export default (state: PostState = postInitialState, action: PostActions) =>
                 });
                 return;
 
-            case PostActionTypes.POST_ADD_UPDATE_SUCCESS:
-                draft.items =
-                    state.items.findIndex((item) => item.id === action.payload.id) > -1
-                        ? state.items.map((item) => {
-                              if (item.id === action.payload.id) {
-                                  return action.payload;
-                              }
-                              return item;
-                          })
-                        : [action.payload, ...state.items];
+            case PostActionTypes.POST_UPDATE_SUCCESS:
+                draft.items = state.items.map((item) => {
+                    if (item.id === action.payload.id) {
+                        return action.payload;
+                    }
+                    return item;
+                });
                 return;
 
             case PostActionTypes.POST_UPDATE_FAILURE:
@@ -52,11 +67,6 @@ export default (state: PostState = postInitialState, action: PostActions) =>
                     }
                     return item;
                 });
-                draft.errors = ErrorMessage(action.payload.reason);
-                return;
-
-            case PostActionTypes.POST_ADD_FAILURE:
-                draft.isLoading = false;
                 draft.errors = ErrorMessage(action.payload.reason);
                 return;
 
